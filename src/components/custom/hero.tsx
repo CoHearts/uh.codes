@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export function Hero() {
@@ -7,10 +8,12 @@ export function Hero() {
     <section id="home" className="pt-25 pb-16 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto max-w-4xl text-center">
         <div className="mb-8">
-          <img
-            src="https://avatars.githubusercontent.com/u/144355134?v=4"
-            alt="Profile"
-            className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-primary/20"
+          <Image
+            src="/profile-image.jpeg"
+            width={180}
+            height={180}
+            alt="Picture of the author"
+            className="rounded-full mx-auto mb-6 border-4 border-primary/20"
           />
           <h1 className="text-3xl sm:text-5xl font-bold mb-4">
             Hi, <span className="text-primary">Udasri here..</span>
@@ -19,9 +22,9 @@ export function Hero() {
             Code Alchemist | AI Explorer | Web Developer
           </p>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm a Computer Science undergrad blending logic with imagination. I
-            craft scalable, smart full-stack web experiences while diving deep
-            into the worlds of AI, ML.😄🧑‍💻
+            {
+              "I'm a Computer Science undergrad blending logic with imagination. I craft scalable, smart full-stack web experiences while diving deep into the worlds of AI, ML.😄🧑‍💻"
+            }
           </p>
         </div>
 
