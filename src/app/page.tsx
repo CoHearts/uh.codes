@@ -1,9 +1,14 @@
+import { Header } from "@/components/custom/header";
+import { Hero } from "@/components/custom/hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <>
-      <h1>Hi, I'm Udasri Hasindu</h1>
+      <div className="min-h-screen bg-background">
+        <Header />
+        <Hero />
+      </div>
     </>
   );
 }
