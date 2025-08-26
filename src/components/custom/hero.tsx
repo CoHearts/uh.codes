@@ -17,6 +17,19 @@ export function Hero() {
   const [hasTyped, setHasTyped] = useState(false);
   const fullText = "Hi, Udasri here..";
 
+
+const gotoContact = () => {
+  window.location.href = "#contact";
+  // smooth scroll
+  const contactElement = document.getElementById("contact");
+  if (contactElement) {
+    window.scrollTo({
+      top: contactElement.offsetTop,
+      behavior: "smooth"
+    });
+  }
+};
+
   useEffect(() => {
     if (hasTyped) {
       setDisplayedText(fullText);
@@ -65,7 +78,7 @@ export function Hero() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-          <Button size="lg" className="gap-2">
+          <Button size="lg" className="gap-2" onClick={gotoContact}>
             <Mail className="w-4 h-4" />
             Get In Touch
           </Button>
