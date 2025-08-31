@@ -18,7 +18,6 @@ const techIcons = [
   { name: "Azure", src: "/icons/azure.svg" },
   { name: "Tensorflow", src: "/icons/tensorflow.svg" },
   { name: "Numpy", src: "/icons/numpy.svg" },
-
 ];
 
 export default function HorizontalSlider() {
@@ -26,17 +25,17 @@ export default function HorizontalSlider() {
     <div className="w-full overflow-hidden rounded-lg py-8">
       <div className="flex animate-scroll">
         {/* First set of icons */}
-        <div className="flex shrink-0 gap-8 px-4">
+        <div className="flex shrink-0 gap-4 sm:gap-8 px-4">
           {techIcons.map((icon, index) => (
             <div
               key={`first-${index}`}
-              className="flex flex-col items-center gap-2 min-w-[80px]"
+              className="flex flex-col items-center gap-2 min-w-[60px] sm:min-w-[80px]"
             >
-              <div className="w-12 h-12 bg-background rounded-lg shadow-sm flex items-center justify-center p-2">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-background rounded-lg shadow-sm flex items-center justify-center p-2">
                 <img
                   src={icon.src || "/placeholder.svg"}
                   alt={icon.name}
-                  className="w-8 h-8 object-contain"
+                  className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                 />
               </div>
               <span className="text-xs text-muted-foreground font-medium">
@@ -47,17 +46,17 @@ export default function HorizontalSlider() {
         </div>
 
         {/* Duplicate set for seamless loop */}
-        <div className="flex shrink-0 gap-8 px-4">
+        <div className="flex shrink-0 gap-4 sm:gap-8 px-4">
           {techIcons.map((icon, index) => (
             <div
               key={`second-${index}`}
-              className="flex flex-col items-center gap-2 min-w-[80px]"
+              className="flex flex-col items-center gap-2 min-w-[60px] sm:min-w-[80px]"
             >
-              <div className="w-12 h-12 bg-background rounded-lg shadow-sm flex items-center justify-center p-2">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-background rounded-lg shadow-sm flex items-center justify-center p-2">
                 <img
                   src={icon.src || "/placeholder.svg"}
                   alt={icon.name}
-                  className="w-8 h-8 object-contain"
+                  className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                 />
               </div>
               <span className="text-xs text-muted-foreground font-medium">
