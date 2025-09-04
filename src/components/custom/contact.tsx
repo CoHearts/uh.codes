@@ -3,11 +3,8 @@
 import type React from "react";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { ContactForm } from "./contactForm";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -65,47 +62,7 @@ export function Contact() {
             </div>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Send me a message</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Input
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <Input
-                    name="email"
-                    type="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <Textarea
-                    name="message"
-                    placeholder="Your Message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full">
-                  Send Message
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          <ContactForm />
         </div>
       </div>
     </section>
