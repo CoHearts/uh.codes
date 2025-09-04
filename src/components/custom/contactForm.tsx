@@ -16,6 +16,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -37,6 +46,7 @@ const formSchema = z.object({
 export function ContactForm() {
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,11 +57,10 @@ export function ContactForm() {
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
     setLoading(true);
     setStatus("");
+    setShowAlert(false);
 
     try {
       const res = await fetch("/api/send-email", {
@@ -68,6 +77,7 @@ export function ContactForm() {
 
       if (res.ok) {
         setStatus("Message sent successfully!");
+        setShowAlert(true);
         form.reset();
       } else {
         setStatus("Failed to send message. Please try again later.");
@@ -77,10 +87,6 @@ export function ContactForm() {
     } finally {
       setLoading(false);
     }
-
-    // alert(
-    //   ` Email: ${values.email}\n Name: ${values.username}\n Message: ${values.message}\n`
-    // );
   }
 
   return (
@@ -130,9 +136,25 @@ export function ContactForm() {
               )}
             />
 
-            <Button type="submit" className="w-full">
-              Send Message
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Sending..." : "Send Message"}
             </Button>
+
+            <AlertDialog open={showAlert} onOpenChange={setShowAlert}>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Success</AlertDialogTitle>
+                </AlertDialogHeader>
+                <AlertDialogDescription>
+                  {status}
+                </AlertDialogDescription>
+                <AlertDialogFooter>
+                  <AlertDialogAction onClick={() => setShowAlert(false)}>
+                    OK
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </form>
         </Form>
       </CardContent>
