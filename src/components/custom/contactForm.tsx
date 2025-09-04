@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -34,7 +35,9 @@ const formSchema = z.object({
 });
 
 export function ContactForm() {
-  // 1. Define your form.
+  const [status, setStatus] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,10 +48,39 @@ export function ContactForm() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    alert(` Email: ${values.email}\n Name: ${values.username}\n Message: ${values.message}\n`);
+    setLoading(true);
+    setStatus("");
+
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: values.username,
+          email: values.email,
+          message: values.message,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("Message sent successfully!");
+        form.reset();
+      } else {
+        setStatus("Failed to send message. Please try again later.");
+      }
+    } catch (error) {
+      setStatus("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+
+    // alert(
+    //   ` Email: ${values.email}\n Name: ${values.username}\n Message: ${values.message}\n`
+    // );
   }
 
   return (
