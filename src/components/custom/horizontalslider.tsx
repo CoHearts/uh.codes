@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 const techIcons = [
   { name: "HTML5", src: "/icons/html.svg" },
@@ -32,8 +33,10 @@ export default function HorizontalSlider() {
               className="flex flex-col items-center gap-2 min-w-[60px] sm:min-w-[80px]"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-background rounded-lg shadow-sm flex items-center justify-center p-2">
-                <img
+                <Image
                   src={icon.src || "/placeholder.svg"}
+                  width={150}
+                  height={150}
                   alt={icon.name}
                   className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                 />
@@ -53,8 +56,10 @@ export default function HorizontalSlider() {
               className="flex flex-col items-center gap-2 min-w-[60px] sm:min-w-[80px]"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-background rounded-lg shadow-sm flex items-center justify-center p-2">
-                <img
+                <Image
                   src={icon.src || "/placeholder.svg"}
+                  width={150}
+                  height={150}
                   alt={icon.name}
                   className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                 />
