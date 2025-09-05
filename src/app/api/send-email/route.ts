@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
               Name: "From Portfolio Visitor",
             },
           ],
-          Subject: `📩 New Message from ${name} via Portfolio Contact Form`,
+          Subject: `📩 Portfolio Message from:  ${name}`,
           TextPart: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
           HTMLPart: `
             <!DOCTYPE html>

@@ -1,33 +1,10 @@
 "use client";
 
 import type React from "react";
-
-import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { ContactForm } from "./contactForm";
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   return (
     <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto max-w-4xl">
