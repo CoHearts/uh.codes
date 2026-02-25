@@ -82,10 +82,12 @@ const gotoContact = () => {
             <Mail className="w-4 h-4" />
             Get In Touch
           </Button>
+          <a href="/Udasri-Hasindu.pdf" download>
           <Button variant="outline" size="lg" className="gap-2 bg-transparent">
             <Download className="w-4 h-4" />
             Download CV
           </Button>
+          </a>
         </div>
 
         <div className="flex justify-center space-x-6">
