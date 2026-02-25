@@ -3,6 +3,7 @@ import { Hero } from "@/components/custom/hero";
 import { Skills } from "@/components/custom/skills";
 // import ChatbotWidget from "@/components/custom/chatbot";
 import { Contact } from "@/components/custom/contact";
+import { Projects } from "@/components/custom/projects";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
         <Header />
         <Hero />
         <Skills />
+        <Projects />
         <Contact />
         {/* <ChatbotWidget /> */}
       </div>
