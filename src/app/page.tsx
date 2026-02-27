@@ -1,10 +1,10 @@
 import { Header } from "@/components/custom/header";
 import { Hero } from "@/components/custom/hero";
 import { Skills } from "@/components/custom/skills";
-// import ChatbotWidget from "@/components/custom/chatbot";
 import { Contact } from "@/components/custom/contact";
 import { Projects } from "@/components/custom/projects";
 import { Achievements } from "@/components/custom/achievements";
+import { ChatbotWidget } from "@/components/custom/chatbot";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         <Projects />
         <Achievements />
         <Contact />
-        {/* <ChatbotWidget /> */}
+        <ChatbotWidget />
       </div>
     </>
   );
