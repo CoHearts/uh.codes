@@ -4,6 +4,7 @@ import { Skills } from "@/components/custom/skills";
 // import ChatbotWidget from "@/components/custom/chatbot";
 import { Contact } from "@/components/custom/contact";
 import { Projects } from "@/components/custom/projects";
+import { Achievements } from "@/components/custom/achievements";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Hero />
         <Skills />
         <Projects />
+        <Achievements />
         <Contact />
         {/* <ChatbotWidget /> */}
       </div>
