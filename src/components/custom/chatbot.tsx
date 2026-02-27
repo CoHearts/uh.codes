@@ -1,64 +1,92 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { MessageCircle, X, Send } from 'lucide-react'
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { MessageCircle, X, Send } from "lucide-react";
 
 interface Message {
-  id: string
-  text: string
-  sender: 'user' | 'bot'
-  timestamp: Date
+  id: string;
+  text: string;
+  sender: "user" | "bot";
+  timestamp: Date;
 }
 
 export function ChatbotWidget() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: '1',
-      text: 'Hello! How can I help you today?',
-      sender: 'bot',
+      id: "1",
+      text: "Hello! How can I help you today?",
+      sender: "bot",
       timestamp: new Date(),
     },
-  ])
-  const [inputValue, setInputValue] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  ]);
+  const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSendMessage = async () => {
-    if (!inputValue.trim()) return
+    if (!inputValue.trim()) return;
 
     // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       text: inputValue,
-      sender: 'user',
+      sender: "user",
       timestamp: new Date(),
-    }
+    };
 
-    setMessages((prev) => [...prev, userMessage])
-    setInputValue('')
-    setIsLoading(true)
+    setMessages((prev) => [...prev, userMessage]);
+    const question = inputValue;
+    setInputValue("");
+    setIsLoading(true);
 
-    // Simulate bot response delay
-    setTimeout(() => {
+    try {
+      // Send request to RAG API
+      const response = await fetch(
+        "https://endearing-vibrancy-production.up.railway.app/ask",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ question }),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Thanks for your message! This is a demo response. Connect this to an AI API to enable real conversations.',
-        sender: 'bot',
+        text: data.Answer,
+        sender: "bot",
         timestamp: new Date(),
-      }
-      setMessages((prev) => [...prev, botMessage])
-      setIsLoading(false)
-    }, 500)
-  }
+      };
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      console.error("Error fetching response:", error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "Sorry, I encountered an error. Please try again later.",
+        sender: "bot",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
-  }
+  };
 
   return (
     <>
@@ -92,29 +120,27 @@ export function ChatbotWidget() {
               <div
                 key={message.id}
                 className={`flex ${
-                  message.sender === 'user'
-                    ? 'justify-end'
-                    : 'justify-start'
+                  message.sender === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 <div
                   className={`max-w-xs px-4 py-2 rounded-lg ${
-                    message.sender === 'user'
-                      ? 'bg-primary text-primary-foreground rounded-br-none'
-                      : 'bg-muted text-muted-foreground rounded-bl-none'
+                    message.sender === "user"
+                      ? "bg-primary text-primary-foreground rounded-br-none"
+                      : "bg-muted text-muted-foreground rounded-bl-none"
                   }`}
                 >
                   <p className="text-sm">{message.text}</p>
                   <span
                     className={`text-xs mt-1 block ${
-                      message.sender === 'user'
-                        ? 'text-primary-foreground/70'
-                        : 'text-muted-foreground/70'
+                      message.sender === "user"
+                        ? "text-primary-foreground/70"
+                        : "text-muted-foreground/70"
                     }`}
                   >
                     {message.timestamp.toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
+                      hour: "2-digit",
+                      minute: "2-digit",
                     })}
                   </span>
                 </div>
@@ -129,11 +155,11 @@ export function ChatbotWidget() {
                     <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" />
                     <div
                       className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
-                      style={{ animationDelay: '0.1s' }}
+                      style={{ animationDelay: "0.1s" }}
                     />
                     <div
                       className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
-                      style={{ animationDelay: '0.2s' }}
+                      style={{ animationDelay: "0.2s" }}
                     />
                   </div>
                 </div>
@@ -166,5 +192,5 @@ export function ChatbotWidget() {
         </div>
       )}
     </>
-  )
+  );
 }
