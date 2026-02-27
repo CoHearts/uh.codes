@@ -65,13 +65,13 @@ export function Projects() {
               </CardContent>
               <CardFooter className="gap-2">
                 <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                  <Button size="sm" className="gap-2">
+                  <Button size="sm" className="gap-2 cursor-pointer">
                     <ExternalLink className="w-4 h-4" />
                     Live Demo
                   </Button>
                 </Link>
                 <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="sm" className="gap-2 bg-transparent">
+                  <Button variant="outline" size="sm" className="gap-2 bg-transparent  cursor-pointer">
                     <Github className="w-4 h-4" />
                     Code
                   </Button>

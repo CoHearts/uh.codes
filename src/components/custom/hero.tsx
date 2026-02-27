@@ -78,12 +78,12 @@ const gotoContact = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-          <Button size="lg" className="gap-2" onClick={gotoContact}>
+          <Button size="lg" className="gap-2 cursor-pointer" onClick={gotoContact}>
             <Mail className="w-4 h-4" />
             Get In Touch
           </Button>
           <a href="/Udasri-Hasindu.pdf" download>
-          <Button variant="outline" size="lg" className="gap-2 bg-transparent">
+          <Button variant="outline" size="lg" className="gap-2 bg-transparent cursor-pointer">
             <Download className="w-4 h-4" />
             Download CV
           </Button>
@@ -92,24 +92,24 @@ const gotoContact = () => {
 
         <div className="flex justify-center space-x-6">
           <Link href={"https://github.com/UdasriHasindu"}>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="cursor-pointer">
               <Github className="w-5 h-5" />
             </Button>
           </Link>
           <Link href={"https://www.linkedin.com/in/udasri-hasindu/"}>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="cursor-pointer">
               <Linkedin className="w-5 h-5" />
             </Button>
           </Link>
           <Link href={"https://www.facebook.com/share/16taveMWKL/"}>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="cursor-pointer">
               <Facebook className="w-5 h-5" />
             </Button>
           </Link>{" "}
           <Link
             href={"https://www.instagram.com/u.sri_?igsh=MWl1eTEwNjdxMnFqMA=="}
           >
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="cursor-pointer">
               <Instagram className="w-5 h-5" />
             </Button>
           </Link>

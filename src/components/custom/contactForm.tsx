@@ -137,7 +137,7 @@ export function ContactForm() {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full cursor-pointer" disabled={loading}>
               {loading ? "Sending..." : "Send Message"}
             </Button>
 
