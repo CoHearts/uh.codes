@@ -93,24 +93,44 @@ export function ChatbotWidget() {
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 flex items-center justify-center z-40 hover:scale-110 active:scale-95"
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gray-800 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 flex items-center justify-center z-40 hover:scale-110 active:scale-95 animate-float"
         aria-label="Open chat"
       >
         {isOpen ? (
           <X className="w-6 h-6" />
         ) : (
-          <MessageCircle className="w-6 h-6" />
+          <img src="/bot.svg" alt="Chat bot" className="w-10" />
         )}
       </button>
+
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        .animate-float {
+          animation: float 2.5s ease-in-out infinite;
+        }
+
+        .animate-float:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
       {/* Chat Dialog */}
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-96 h-[600px] bg-background border border-border rounded-2xl shadow-2xl flex flex-col z-40 animate-in fade-in slide-in-from-bottom-4 duration-300">
           {/* Header */}
-          <div className="bg-primary text-primary-foreground p-4 rounded-t-2xl">
+          <div className="bg-gray-800 text-primary-foreground p-4 rounded-t-2xl">
             <h2 className="text-lg font-semibold">Chat with me</h2>
             <p className="text-xs text-primary-foreground/70">
-              Ask me anything about my work
+              Ask me about my things..
             </p>
           </div>
 
@@ -126,7 +146,7 @@ export function ChatbotWidget() {
                 <div
                   className={`max-w-xs px-4 py-2 rounded-lg ${
                     message.sender === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-none"
+                      ? "bg-gray-800 text-primary-foreground rounded-br-none"
                       : "bg-muted text-muted-foreground rounded-bl-none"
                   }`}
                 >
