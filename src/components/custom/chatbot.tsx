@@ -118,7 +118,7 @@ export function ChatbotWidget() {
 
       {/* Chat Dialog */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 h-[600px] bg-background border border-border rounded-2xl shadow-2xl flex flex-col z-40 animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className="fixed bottom-20 right-4 left-4 sm:left-auto sm:bottom-24 sm:right-6 w-auto sm:w-96 h-[70vh] sm:h-[600px] max-h-[600px] sm:max-h-none bg-background border border-border rounded-2xl shadow-2xl flex flex-col z-40 animate-in fade-in slide-in-from-bottom-4 duration-300">
           {/* Header */}
           <div className="bg-gray-800 text-primary-foreground p-4 rounded-t-2xl">
             <h2 className="text-lg font-semibold">Chat with me</h2>
