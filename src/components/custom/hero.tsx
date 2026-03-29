@@ -17,18 +17,17 @@ export function Hero() {
   const [hasTyped, setHasTyped] = useState(false);
   const fullText = "Hi, Udasri here..";
 
-
-const gotoContact = () => {
-  window.location.href = "#contact";
-  // smooth scroll
-  const contactElement = document.getElementById("contact");
-  if (contactElement) {
-    window.scrollTo({
-      top: contactElement.offsetTop,
-      behavior: "smooth"
-    });
-  }
-};
+  const gotoContact = () => {
+    window.location.href = "#contact";
+    // smooth scroll
+    const contactElement = document.getElementById("contact");
+    if (contactElement) {
+      window.scrollTo({
+        top: contactElement.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
 
   useEffect(() => {
     if (hasTyped) {
@@ -55,7 +54,7 @@ const gotoContact = () => {
       <div className="container mx-auto max-w-4xl text-center">
         <div className="mb-8">
           <Image
-            src="/profile-image.jpeg"
+            src="/dp.jpeg"
             width={180}
             height={180}
             alt="Picture of the author"
@@ -78,15 +77,23 @@ const gotoContact = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-          <Button size="lg" className="gap-2 cursor-pointer" onClick={gotoContact}>
+          <Button
+            size="lg"
+            className="gap-2 cursor-pointer"
+            onClick={gotoContact}
+          >
             <Mail className="w-4 h-4" />
             Get In Touch
           </Button>
           <a href="/Udasri-Hasindu.pdf" download>
-          <Button variant="outline" size="lg" className="gap-2 bg-transparent cursor-pointer">
-            <Download className="w-4 h-4" />
-            Download CV
-          </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="gap-2 bg-transparent cursor-pointer"
+            >
+              <Download className="w-4 h-4" />
+              Download CV
+            </Button>
           </a>
         </div>
 
