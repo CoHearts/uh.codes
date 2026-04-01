@@ -37,7 +37,7 @@ export function ChatbotWidget() {
     try {
       // Send request to RAG API
       const response = await fetch(
-        "https://endearing-vibrancy-production.up.railway.app/ask",
+        "https://udasri-uh-info.hf.space/ask",
         {
           method: "POST",
           headers: {
