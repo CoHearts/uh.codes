@@ -36,21 +36,24 @@ export function useHFSpace() {
     }
   }, []);
 
-  const pollUntilReady = useCallback(async (attempt = 0) => {
-    if (attempt >= MAX_STATUS_POLLS) {
-      setStatus("error");
-      return;
-    }
+  const pollUntilReady = useCallback(
+    async (attempt = 0) => {
+      if (attempt >= MAX_STATUS_POLLS) {
+        setStatus("error");
+        return;
+      }
 
-    const nextStatus = await checkStatus();
-    if (nextStatus === "ready" || nextStatus === "error") {
-      return;
-    }
+      const nextStatus = await checkStatus();
+      if (nextStatus === "ready" || nextStatus === "error") {
+        return;
+      }
 
-    pollingRef.current = setTimeout(() => {
-      void pollUntilReady(attempt + 1);
-    }, POLL_INTERVAL_MS);
-  }, [checkStatus]);
+      pollingRef.current = setTimeout(() => {
+        void pollUntilReady(attempt + 1);
+      }, POLL_INTERVAL_MS);
+    },
+    [checkStatus],
+  );
 
   const triggerWakeUp = useCallback(() => {
     clearPolling();

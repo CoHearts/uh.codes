@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageCircle, X, Send } from "lucide-react";
+import { X, Send } from "lucide-react";
+import { useHFSpace } from "@/hooks/useHFSpace";
 
 interface Message {
   id: string;
@@ -17,6 +18,7 @@ export function ChatbotWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { status, triggerWakeUp } = useHFSpace();
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
@@ -36,16 +38,13 @@ export function ChatbotWidget() {
 
     try {
       // Send request to RAG API
-      const response = await fetch(
-        "https://udasri-uh-info.hf.space/ask",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ question }),
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({ question }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to get response");
@@ -81,11 +80,25 @@ export function ChatbotWidget() {
     }
   };
 
+  const statusText =
+    status === "checking"
+      ? "Connecting to AI service..."
+      : status === "waking"
+        ? "Warming up AI service. This can take 20-60 seconds..."
+        : status === "error"
+          ? "AI service is currently unavailable."
+          : null;
+
+  const isServiceBusy = status === "checking" || status === "waking";
+
   return (
     <>
       {/* Floating Chat Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          triggerWakeUp();
+        }}
         className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gray-800 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 flex items-center justify-center z-40 hover:scale-110 active:scale-95 animate-float"
         aria-label="Open chat"
       >
@@ -126,6 +139,12 @@ export function ChatbotWidget() {
               Ask me about my things..
             </p>
           </div>
+
+          {statusText && (
+            <div className="mx-4 mt-3 rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-700 dark:text-amber-300">
+              {statusText}
+            </div>
+          )}
 
           {/* Messages Container */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -185,17 +204,19 @@ export function ChatbotWidget() {
             <div className="flex gap-2">
               <Input
                 type="text"
-                placeholder="Type a message..."
+                placeholder={
+                  isServiceBusy ? "Starting AI service..." : "Type a message..."
+                }
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={handleKeyDown}
-                disabled={isLoading}
+                disabled={isLoading || isServiceBusy}
                 className="flex-1"
               />
               <Button
                 size="icon"
                 onClick={handleSendMessage}
-                disabled={isLoading || !inputValue.trim()}
+                disabled={isLoading || isServiceBusy || !inputValue.trim()}
                 className="rounded-lg"
               >
                 <Send className="w-4 h-4" />
