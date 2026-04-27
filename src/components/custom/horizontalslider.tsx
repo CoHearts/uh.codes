@@ -12,12 +12,15 @@ const techIcons = [
   { name: "Node.js", src: "/icons/nodejs.svg" },
   { name: "Spring Boot", src: "/icons/spring-boot.svg" },
   { name: "Supabase", src: "/icons/supabase.svg" },
+  { name: "FastAPI", src: "/icons/fastapi.svg" },
   { name: "Flask", src: "/icons/flask.svg" },
   { name: "Git", src: "/icons/git.svg" },
   { name: "Linux", src: "/icons/linux.svg" },
   { name: "Docker", src: "/icons/docker.svg" },
   { name: "Azure", src: "/icons/azure.svg" },
   { name: "Tensorflow", src: "/icons/tensorflow.svg" },
+  { name: "Hugging Face", src: "/icons/huggingface.svg" },
+  { name: "LangGraph", src: "/icons/langgraph.svg" },
   { name: "Numpy", src: "/icons/numpy.svg" },
 ];
 

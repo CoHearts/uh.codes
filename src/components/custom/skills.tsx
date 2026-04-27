@@ -23,6 +23,7 @@ export function Skills() {
         "Node.js",
         "Express",
         "Flask",
+        "FastAPI",
         "PostgreSQL",
         "MySQL",
         "Supabase",
@@ -31,7 +32,7 @@ export function Skills() {
     },
     {
       title: "Tools & Others",
-      skills: ["Git", "Linux", "Docker", "Azure", "Tensorflow"],
+      skills: ["Git", "Linux", "Docker", "Azure", "Hugging Face", "LangGraph"],
     },
   ];
 
