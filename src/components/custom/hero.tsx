@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 export function Hero() {
   const [displayedText, setDisplayedText] = useState("");
   const [hasTyped, setHasTyped] = useState(false);
-  const fullText = "Hi, Udasri here..";
+  const fullText = "Hi, Hasindu is here..";
 
   const gotoContact = () => {
     window.location.href = "#contact";
