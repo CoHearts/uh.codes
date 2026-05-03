@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import HorizontalSlider from "./horizontalslider";
+import { ExperienceTimeline } from "./experience";
 
 export function Skills() {
   const skillCategories = [
@@ -39,8 +40,10 @@ export function Skills() {
   return (
     <section id="expertise" className="py-16 px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
-        Skills & Technologies
+        Skills & Experience
       </h2>
+
+      <ExperienceTimeline />
 
       <HorizontalSlider />
       <div className="container mx-auto max-w-4xl">
