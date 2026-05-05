@@ -5,6 +5,7 @@ import { Contact } from "@/components/custom/contact";
 import { Projects } from "@/components/custom/projects";
 import { Achievements } from "@/components/custom/achievements";
 import { ChatbotWidget } from "@/components/custom/chatbot";
+import { Certificates } from "@/components/custom/certificates";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Header />
         <Hero />
         <Skills />
+        <Certificates />
         <Projects />
         <Achievements />
         <Contact />
